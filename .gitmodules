@@ -1,0 +1,3 @@
+[submodule "cmake/Catch2"]
+	path = cmake/Catch2
+	url = https://github.com/catchorg/Catch2.git
