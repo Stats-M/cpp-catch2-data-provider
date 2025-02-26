@@ -4,7 +4,7 @@ project(cpp_catch2_data_provider VERSION 0.0.1)
 # Вычисляем разные полезные переменные
 set(USER_HOME_DIRECTORY $ENV{USERPROFILE})
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_COMPILER "/usr/bin/g++-12")
 #set(CMAKE_CXX_FLAGS "-mavx")   Включение SIMD (SSE) команд при использовании библиотеки xsimd
 
@@ -67,11 +67,17 @@ add_test(NAME CubeTests COMMAND catch2_test)
 # РЕШЕНИЕ #2 (не работает):
 # -------------------------
 # По умолчанию тесты запускаются через IDE (Run test) командой "<path>/catch2_test -r xml -d yes --order lex"
-# В CLion есть проблема с отображением XML из-за неверной схемы. Нужно либо убрать опцию показа XML, либо запускать
-# тесты из командной строки.
-# Вариант 1) Run -> Edit Configurations, указать только нужные аргументы "-d yes --order lex"
-# Вариант 2) Перейти в терминале в папку с исполняемым файлом (имя как у тестовой цели: catch2_test) и запустить его:
-#                   cd cpp-catch2-data-provider/cmake-build-debug
-#                   ./catch2_test
-#                   ./catch2_test [get_cube]            <- Запуск тестов по тегу
-#            Вывод результатов будет произведен в терминал
+# В CLion есть проблема с отображением XML из-за неверной схемы. Нужно убрать опцию показа XML, либо запускать
+# тесты из командной строки
+#   Run -> Edit Configurations, указать только нужные аргументы "-d yes --order lex"
+#
+# ЗАПУСК ТЕСТОВ ИЗ КОМАНДНОЙ СТРОКИ:
+# ==================================
+# Запуск тестов из командной строки:
+#   Перейти в терминале в папку с исполняемым файлом (имя как у тестовой цели: catch2_test) и запустить его:
+#       cd cpp-catch2-data-provider/cmake-build-debug
+#       ./catch2_test                       <- Запуск всех тестов
+#       ./catch2_test -d yes --order lex    <- Запуск тестов с отсчетом времени каждого теста
+#       ./catch2_test -r xml -d yes --order lex    <- Вывод в терминал XML документа с результатами теста
+#       ./catch2_test [get_cube]            <- Запуск тестов только с указанным тегом
+#   Вывод результатов будет произведен в терминал
