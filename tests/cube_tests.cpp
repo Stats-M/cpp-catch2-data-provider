@@ -1,5 +1,6 @@
 #include "catch2/catch_all.hpp"        // Подключаем библиотеку Catch2 v3
 #include "../src/cube.h"               // Включаем заголовочный файл с тестируемыми функциями
+#include "TestDataProvider.h"          // Заголовочный файл вариантов реализации DataProvider
 
 #include <vector>
 
@@ -129,5 +130,29 @@ TEST_CASE("multiply_by_two_void function tests", "[multiply_by_two_void]")
         std::vector<int> expected = {};
         multiply_by_two_void(input);
         REQUIRE(input == expected);
+    }
+}
+
+
+/**
+ * Тестовый случай с использованием DataProvider, реализованного в виде функции,
+ * возвращающей тестовые данные (Способ №1)
+ */
+TEST_CASE("get_cube function tests with DP via function", "[get_cube]")
+{
+    // Получаем тестовые данные
+    auto test_data = get_cube_test_data();
+
+    // Итерируемся по тестовым данным
+    for (const auto& data : test_data)
+    {
+        std::string test_name = std::get<0>(data);
+        double input = std::get<1>(data);
+        double expected = std::get<2>(data);
+
+        SECTION(test_name)
+        {
+            REQUIRE(get_cube(input) == Approx(expected));
+        }
     }
 }

@@ -27,10 +27,12 @@ add_executable(cpp_catch2_exec
 # Создаем отдельную тестовую цель, чтобы тесты не включались в основной исполняемый файл.
 # При сборке этой цели будет создан исполняемый файл с именем "catch2_test_exec"
 add_executable(catch2_test_exec
-        tests/main.cpp          # Основной файл для тестов (с CATCH_CONFIG_MAIN)
-        tests/cube_tests.cpp    # Файл с тестами для cube.h
-        #src/cube.h              # !!! Заголовочные файлы доступны из тестов через #include, можно не подключать повторно здесь
-        src/cube.cpp            # !!! Файл с определениями тестируемых функций, иначе линкер не увидит нешаблонные функции
+        tests/main.cpp              # Основной файл для тестов (с CATCH_CONFIG_MAIN)
+        tests/cube_tests.cpp        # Файл с тестами для cube.h
+        #src/cube.h                  # !!! Заголовочные файлы доступны из тестов через #include, можно не подключать повторно здесь
+        src/cube.cpp                # !!! Файл с определениями тестируемых функций, иначе линкер не увидит нешаблонные функции
+        tests/TestDataProvider.h
+        tests/TestDataProvider.cpp  # DataProvider для тех тестов, которые это предусматривают (нешаблонные функции для линкера)
 )
 
 # Связываем Catch2 ТОЛЬКО с тестовой целью (link against Catch2WithMain target if you use Catch2's default main)
