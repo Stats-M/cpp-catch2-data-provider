@@ -7,7 +7,7 @@
 ### _git submodule add https:\//github.com/catchorg/Catch2.git cmake/Catch2_
 ### Это добавит Catch2 в виде подмодуля (в директорию cmake/Catch2), а также добаивт файл .gitmodules в корневую папку проекта
 
-
+Для получения вводной информации смотрите файл CMakeLists.txt
 
 #### Файлы проекта:
 
